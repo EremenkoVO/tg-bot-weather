@@ -19,21 +19,36 @@ bot.help((ctx) => {
 
 bot.on('message', (ctx) => {
   let url = ctx.message.location
-    ? `https://api.openweathermap.org/data/2.5/weather?lat=${ctx.message.location.latitude}&lon=${ctx.message.location.longitude}&appid=${process.env.API_KEY}`
+    ? `https://api.openweathermap.org/data/2.5/weather?lat=${ctx.message.location.latitude}&lon=${ctx.message.location.longitude}&units=metric&lang=ru&appid=${process.env.API_KEY}`
     : `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(
         ctx.message.text,
-      )}&appid=${process.env.API_KEY}`;
+      )}&units=metric&lang=ru&appid=${process.env.API_KEY}`;
 
-  console.log(url);
   axios
     .get(url)
     .then(function (response) {
-      console.log(response.data);
+      let message = getWeather(response.data);
+      ctx.reply(message);
     })
     .catch(function (error) {
-      console.error(error);
       ctx.reply('Ошибка получения ответа от сервера');
     });
 });
 
 bot.launch();
+
+/**
+ * Форматирование сообщения
+ *
+ * @param {*} data
+ */
+function getWeather(data) {
+  let message = `Температура: ${Math.ceil(
+    data.main.temp,
+  )}°\n${data.weather[0].description[0].toUpperCase()}${data.weather[0].description.slice(
+    1,
+  )}\nМин. темп.: ${Math.ceil(data.main.temp_min)}°\nМакс. темп.: ${Math.ceil(
+    data.main.temp_max,
+  )}°`;
+  return message;
+}
