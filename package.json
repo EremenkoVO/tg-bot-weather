@@ -4,5 +4,27 @@
     "dotenv": "^10.0.0",
     "nodemon": "^2.0.15",
     "telegraf": "^4.4.2"
-  }
+  },
+  "name": "tg-bot-weather",
+  "description": "Телеграмм бот, который показывает погоду",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EremenkoVO/tg-bot-weather.git"
+  },
+  "keywords": [
+    "bot",
+    "weather"
+  ],
+  "author": "Eremenko Vadim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EremenkoVO/tg-bot-weather/issues"
+  },
+  "homepage": "https://github.com/EremenkoVO/tg-bot-weather#readme"
 }
